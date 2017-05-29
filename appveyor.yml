@@ -31,9 +31,13 @@ test_script:
   - echo %RUBYOPT%
   - dir "c:/ri2-ruby"
   - dir "c:/ri2-ruby/bin"
+  - ridk enable
+  - ridk install 1
   # Install dependent gems
   - gem install bundler
   - bundle install
+  - bundle exec ruby -e "puts ENV['PATH']"
+  - bundle exec ruby -rdevkit -e "puts ENV['PATH']"
   # Run all tests against the new installed Ruby and verify that the used CA list is still the latest.
   - bundle exec rake test ssl:update_check
 
